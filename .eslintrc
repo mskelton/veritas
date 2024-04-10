@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "@mskelton",
+    "@mskelton/eslint-config/react",
+    "next/core-web-vitals"
+  ]
+}
