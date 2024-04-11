@@ -1,8 +1,9 @@
 import Link from "next/link"
+import { ColumnDef, Table } from "@/app/components/Table"
 import { dataSources, db } from "@/app/lib/db"
 
-export default async function Page() {
-  const rows = await db
+function getDataSources() {
+  return db
     .select({
       host: dataSources.host,
       id: dataSources.id,
@@ -11,6 +12,48 @@ export default async function Page() {
       username: dataSources.username,
     })
     .from(dataSources)
+}
+
+type DataSource = Awaited<ReturnType<typeof getDataSources>>[number]
+
+const columnDefs: ColumnDef<DataSource>[] = [
+  {
+    emphasize: true,
+    key: "name",
+    title: "Name",
+  },
+  {
+    key: "type",
+    title: "Type",
+  },
+  {
+    key: "host",
+    title: "Host",
+  },
+  {
+    key: "username",
+    title: "Username",
+  },
+  {
+    align: "right",
+    emphasize: true,
+    hideTitle: true,
+    key: "actions",
+    render: ({ row }) => (
+      <Link
+        className="text-indigo-600 hover:text-indigo-900"
+        href={`/data-sources/${row.id}`}
+      >
+        Edit
+        <span className="sr-only">, {row.name}</span>
+      </Link>
+    ),
+    title: "Actions",
+  },
+]
+
+export default async function Page() {
+  const rows = await getDataSources()
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -38,72 +81,7 @@ export default async function Page() {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      scope="col"
-                    >
-                      Name
-                    </th>
-                    <th
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
-                      Type
-                    </th>
-                    <th
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
-                      Host
-                    </th>
-                    <th
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
-                      Username
-                    </th>
-                    <th
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                      scope="col"
-                    >
-                      <span className="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
-
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {rows.map((dataSource) => (
-                    <tr key={dataSource.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        {dataSource.name}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {dataSource.type}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {dataSource.host}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {dataSource.username}
-                      </td>
-                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <Link
-                          className="text-indigo-600 hover:text-indigo-900"
-                          href={`/data-sources/${dataSource.id}`}
-                        >
-                          Edit
-                          <span className="sr-only">, {dataSource.name}</span>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table columnDefs={columnDefs} rows={rows} />
           </div>
         </div>
       </div>
