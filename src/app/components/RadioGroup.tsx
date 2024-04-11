@@ -1,25 +1,31 @@
 import { useId } from "react"
 
-export interface RadioGroupProps {
+export interface RadioGroupProps<T extends string> {
   className?: string
+  defaultValue?: NoInfer<T>
   description: string
   label: string
   name: string
-  options: { label: string; value: string }[]
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  options: { label: string; value: T }[]
+  value?: NoInfer<T>
 }
 
-export default function RadioGroup({
+export function RadioGroup<T extends string>({
   className,
+  defaultValue,
   description,
   label,
   name,
+  onChange,
   options,
-}: RadioGroupProps) {
+  value,
+}: RadioGroupProps<T>) {
   const groupId = useId()
 
   return (
     <div className={className}>
-      <label className="text-sm font-semibold text-gray-900">{label}</label>
+      <label className="text-sm font-medium text-gray-900">{label}</label>
       <p className="text-xs text-gray-500">{description}</p>
 
       <fieldset className="mt-4">
@@ -31,14 +37,18 @@ export default function RadioGroup({
             return (
               <div key={option.value} className="flex items-center">
                 <input
+                  checked={value ? option.value === value : undefined}
                   className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  defaultChecked={option.value === defaultValue}
                   id={id}
                   name={name}
+                  onChange={onChange}
                   type="radio"
+                  value={option.value}
                 />
 
                 <label
-                  className="ml-3 block text-sm font-medium leading-6 text-gray-900"
+                  className="ml-3 block text-sm leading-6 text-gray-900"
                   htmlFor={id}
                 >
                   {option.label}

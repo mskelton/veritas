@@ -1,0 +1,19 @@
+version: "3"
+services:
+  test-postgres-a:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: test-a
+      POSTGRES_PASSWORD: password-a
+      POSTGRES_DB: test-postgres-a
+    volumes:
+      - ./test/seed/a.sql:/docker-entrypoint-initdb.d/init.sql
+
+  test-postgres-b:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: test-b
+      POSTGRES_PASSWORD: password-b
+      POSTGRES_DB: test-postgres-b
+    volumes:
+      - ./test/seed/b.sql:/docker-entrypoint-initdb.d/init.sql

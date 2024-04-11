@@ -1,22 +1,16 @@
 import Link from "next/link"
+import { dataSources, db } from "@/app/lib/db"
 
-export default function Page() {
-  const dataSources = [
-    {
-      host: "localhost",
-      id: 1,
-      name: "Postgres",
-      type: "Postgres",
-      username: "postgres",
-    },
-    {
-      host: "localhost",
-      id: 2,
-      name: "MySQL",
-      type: "MySQL",
-      username: "root",
-    },
-  ]
+export default async function Page() {
+  const rows = await db
+    .select({
+      host: dataSources.host,
+      id: dataSources.id,
+      name: dataSources.name,
+      type: dataSources.type,
+      username: dataSources.username,
+    })
+    .from(dataSources)
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -82,7 +76,7 @@ export default function Page() {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {dataSources.map((dataSource) => (
+                  {rows.map((dataSource) => (
                     <tr key={dataSource.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {dataSource.name}
