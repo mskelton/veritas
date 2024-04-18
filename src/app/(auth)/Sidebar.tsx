@@ -114,7 +114,7 @@ export function Sidebar() {
                                 className={clsx(
                                   isActive(item)
                                     ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
                                   "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
                                 )}
                                 href={item.href}
@@ -124,7 +124,7 @@ export function Sidebar() {
                                   className={clsx(
                                     isActive(item)
                                       ? "text-indigo-600"
-                                      : "text-gray-400 group-hover:text-indigo-600",
+                                      : "text-gray-400 group-hover:text-indigo-600 transition-colors",
                                     "h-6 w-6 shrink-0",
                                   )}
                                 />
@@ -134,9 +134,10 @@ export function Sidebar() {
                           ))}
                         </ul>
                       </li>
+
                       <li>
                         <div className="text-xs font-semibold leading-6 text-gray-400">
-                          Your teams
+                          Recent facts
                         </div>
                         <ul className="-mx-2 mt-2 space-y-1" role="list">
                           {recent.map((team) => (
@@ -145,7 +146,7 @@ export function Sidebar() {
                                 className={clsx(
                                   team.current
                                     ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
                                   "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
                                 )}
                                 href={team.href}
@@ -154,7 +155,7 @@ export function Sidebar() {
                                   className={clsx(
                                     team.current
                                       ? "text-indigo-600 border-indigo-600"
-                                      : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600",
+                                      : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 transition-colors",
                                     "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white",
                                   )}
                                 >
@@ -196,7 +197,7 @@ export function Sidebar() {
                         className={clsx(
                           isActive(item)
                             ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
                         )}
                         href={item.href}
@@ -206,7 +207,7 @@ export function Sidebar() {
                           className={clsx(
                             isActive(item)
                               ? "text-indigo-600"
-                              : "text-gray-400 group-hover:text-indigo-600",
+                              : "text-gray-400 group-hover:text-indigo-600 transition-colors",
                             "h-6 w-6 shrink-0",
                           )}
                         />
@@ -218,7 +219,7 @@ export function Sidebar() {
               </li>
               <li>
                 <div className="text-xs font-semibold leading-6 text-gray-400">
-                  Your teams
+                  Recent facts
                 </div>
                 <ul className="-mx-2 mt-2 space-y-1" role="list">
                   {recent.map((team) => (
@@ -227,7 +228,7 @@ export function Sidebar() {
                         className={clsx(
                           team.current
                             ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
                         )}
                         href={team.href}
@@ -236,7 +237,7 @@ export function Sidebar() {
                           className={clsx(
                             team.current
                               ? "text-indigo-600 border-indigo-600"
-                              : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600",
+                              : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 transition-colors",
                             "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white",
                           )}
                         >
@@ -250,7 +251,7 @@ export function Sidebar() {
               </li>
               <li className="-mx-6 mt-auto">
                 <a
-                  className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                  className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 transition-colors"
                   href="#"
                 >
                   <img
