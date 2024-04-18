@@ -28,8 +28,8 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
           <TextField
             className="col-span-full"
             defaultValue={defaultValues?.description ?? ""}
+            isMultiline
             label="Description"
-            multiline
             name="description"
           />
         </FormSection>

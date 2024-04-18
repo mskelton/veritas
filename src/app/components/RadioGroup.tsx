@@ -1,4 +1,5 @@
 import { useId } from "react"
+import { Label } from "./Label"
 
 export interface RadioGroupProps<T extends string> {
   className?: string
@@ -25,7 +26,7 @@ export function RadioGroup<T extends string>({
 
   return (
     <div className={className}>
-      <label className="text-sm font-medium text-gray-900">{label}</label>
+      <Label>{label}</Label>
       <p className="text-xs text-gray-500">{description}</p>
 
       <fieldset className="mt-4">

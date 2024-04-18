@@ -6,6 +6,7 @@ import {
   Bars3Icon,
   CheckBadgeIcon,
   CircleStackIcon,
+  CommandLineIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline"
@@ -17,6 +18,7 @@ const navigation: NavItem[] = [
   { href: "/", icon: HomeIcon, name: "Dashboard" },
   { href: "/facts", icon: CheckBadgeIcon, name: "Facts" },
   { href: "/data-sources", icon: CircleStackIcon, name: "Data Sources" },
+  { href: "/playground", icon: CommandLineIcon, name: "Playground" },
 ]
 
 type NavItem = {

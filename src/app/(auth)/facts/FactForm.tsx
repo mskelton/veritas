@@ -27,8 +27,8 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
           <TextField
             className="col-span-full"
             defaultValue={defaultValues?.description ?? ""}
+            isMultiline
             label="Description"
-            multiline
             name="description"
           />
 
@@ -47,8 +47,8 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
           <TextField
             className="sm:col-span-2"
             defaultValue={defaultValues?.query ?? ""}
+            isMultiline
             label="SQL Query"
-            multiline
             name="query"
           />
         </FormSection>
