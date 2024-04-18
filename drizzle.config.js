@@ -1,9 +1,9 @@
 /** @type { import("drizzle-kit").Config } */
 const config = {
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
   },
-  driver: "libsql",
+  driver: "pg",
   schema: "./src/app/lib/db/schema.ts",
 }
 

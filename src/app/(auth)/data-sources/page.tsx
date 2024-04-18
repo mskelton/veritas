@@ -24,6 +24,7 @@ const columnDefs: ColumnDef<DataSource>[] = [
   },
   {
     key: "type",
+    render: ({ value }) => (value === "postgres" ? "PostgreSQL" : "MySQL"),
     title: "Type",
   },
   {

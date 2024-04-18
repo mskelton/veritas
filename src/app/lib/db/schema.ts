@@ -1,7 +1,7 @@
 /* eslint-disable sort/object-properties */
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { integer, pgTable, text } from "drizzle-orm/pg-core"
 
-export const dataSources = sqliteTable("data_sources", {
+export const dataSources = pgTable("data_sources", {
   id: text("id").primaryKey(),
   name: text("name"),
   description: text("description"),
@@ -13,6 +13,10 @@ export const dataSources = sqliteTable("data_sources", {
   database: text("database"),
 })
 
-export const facts = sqliteTable("facts", {
-  id: text("id"),
+export const facts = pgTable("facts", {
+  id: text("id").primaryKey(),
+  name: text("name"),
+  description: text("description"),
+  type: text("type", { enum: ["boolean", "count"] }),
+  query: text("query"),
 })
