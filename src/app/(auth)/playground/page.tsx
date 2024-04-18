@@ -1,12 +1,33 @@
 "use client"
 
 import { useFormState } from "react-dom"
-import { Code } from "@/app/components/Code"
 import { Label } from "@/app/components/Label"
 import { SubmitButton } from "@/app/components/SubmitButton"
+import { Table } from "@/app/components/Table"
+import { ColumnDef } from "@/app/components/Table"
 import { TextField } from "@/app/components/TextField"
 import { QueryError } from "./QueryError"
-import { runQueryAction } from "./runQuery"
+import { runQueryAction, RunQueryResult } from "./runQuery"
+
+const columnDefs: ColumnDef<RunQueryResult>[] = [
+  {
+    emphasize: true,
+    key: "dataSource.name",
+    title: "Data Source",
+  },
+  {
+    key: "value",
+    render: ({ value }) =>
+      value === true ? (
+        <span className="text-green-500">Yes</span>
+      ) : value === false ? (
+        <span className="text-red-500">No</span>
+      ) : (
+        (value as number)
+      ),
+    title: "Result",
+  },
+]
 
 export default function Page() {
   const [state, formAction] = useFormState(runQueryAction, {})
@@ -30,7 +51,7 @@ export default function Page() {
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <form action={formAction} className="mb-4">
               <TextField
-                defaultValue="select * from facts"
+                defaultValue="select * from authors"
                 isMultiline
                 label="Query"
                 name="query"
@@ -44,9 +65,7 @@ export default function Page() {
             ) : state.results ? (
               <>
                 <Label className="mb-2">Results</Label>
-                <Code isMultiline>
-                  {JSON.stringify(state.results, null, 2)}
-                </Code>
+                <Table columnDefs={columnDefs} rows={state.results} />
               </>
             ) : null}
           </div>

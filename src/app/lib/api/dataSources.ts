@@ -1,21 +1,21 @@
 import { eq } from "drizzle-orm"
-import { dataSources, db } from "../db"
+import { db, schema } from "../db"
 
 export async function getDataSource(id: string) {
   const rows = await db
     .select({
-      database: dataSources.database,
-      description: dataSources.description,
-      host: dataSources.host,
-      id: dataSources.id,
-      name: dataSources.name,
-      password: dataSources.password,
-      port: dataSources.port,
-      type: dataSources.type,
-      username: dataSources.username,
+      database: schema.dataSources.database,
+      description: schema.dataSources.description,
+      host: schema.dataSources.host,
+      id: schema.dataSources.id,
+      name: schema.dataSources.name,
+      password: schema.dataSources.password,
+      port: schema.dataSources.port,
+      type: schema.dataSources.type,
+      username: schema.dataSources.username,
     })
-    .from(dataSources)
-    .where(eq(dataSources.id, id))
+    .from(schema.dataSources)
+    .where(eq(schema.dataSources.id, id))
 
   return rows[0]
 }

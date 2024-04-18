@@ -1,17 +1,17 @@
 import { eq } from "drizzle-orm"
-import { db, facts } from "../db"
+import { db, schema } from "../db"
 
 export async function getFact(id: string) {
   const rows = await db
     .select({
-      description: facts.description,
-      id: facts.id,
-      name: facts.name,
-      query: facts.query,
-      type: facts.type,
+      description: schema.facts.description,
+      id: schema.facts.id,
+      name: schema.facts.name,
+      query: schema.facts.query,
+      type: schema.facts.type,
     })
-    .from(facts)
-    .where(eq(facts.id, id))
+    .from(schema.facts)
+    .where(eq(schema.facts.id, id))
 
   return rows[0]
 }

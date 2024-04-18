@@ -6,7 +6,7 @@ import { Label } from "./Label"
 export interface TextFieldProps
   extends Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "autoComplete" | "defaultValue" | "name" | "type" | "value"
+    "autoComplete" | "autoFocus" | "defaultValue" | "name" | "type" | "value"
   > {
   className?: string
   isMultiline?: boolean

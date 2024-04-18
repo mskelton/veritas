@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { dataSources, db } from "@/app/lib/db"
+import { db, schema } from "@/app/lib/db"
 import { get } from "@/app/lib/formData"
 import { DataSourceForm } from "../DataSourceForm"
 
@@ -7,7 +7,7 @@ export default function Page() {
   async function create(formData: FormData) {
     "use server"
 
-    await db.insert(dataSources).values({
+    await db.insert(schema.dataSources).values({
       database: get(formData, "database"),
       description: get(formData, "description"),
       host: get(formData, "host"),

@@ -1,11 +1,23 @@
 import { acquire } from "./connections"
 
 type RunQueryOptions = {
+  query: string
   url: string
 }
 
-export function runQuery(query: string, { url }: RunQueryOptions) {
-  const sql = acquire(url)
+function buildFactQuery(query: string) {
+  return `
+with sub as (
+  ${query}
+)
+select count(1) as count
+from sub
+  `.trim()
+}
 
-  return sql.unsafe(query)
+export function runQuery({ query, url }: RunQueryOptions) {
+  const sql = acquire(url)
+  const compiled = buildFactQuery(query)
+
+  return sql.unsafe(compiled)
 }

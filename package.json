@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "migrate": "drizzle-kit push:sqlite"
+    "migrate": "drizzle-kit push:sqlite",
+    "test:setup": "./scripts/setup-tests.sh",
+    "test": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

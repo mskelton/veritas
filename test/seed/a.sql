@@ -27,3 +27,5 @@ CREATE TABLE post_tags (
     PRIMARY KEY (post_id, tag_id)
 );
 
+INSERT INTO authors (id, name, bio)
+VALUES (0, 'mark', 'yo');

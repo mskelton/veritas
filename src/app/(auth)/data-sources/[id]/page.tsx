@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm"
 import { redirect } from "next/navigation"
 import { getDataSource } from "@/app/lib/api/dataSources"
-import { dataSources, db } from "@/app/lib/db"
+import { db, schema } from "@/app/lib/db"
 import { get } from "@/app/lib/formData"
 import { DataSourceForm } from "../DataSourceForm"
 
@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     "use server"
 
     await db
-      .update(dataSources)
+      .update(schema.dataSources)
       .set({
         database: get(formData, "database"),
         description: get(formData, "description"),
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         type: get(formData, "type") as "mysql" | "postgres",
         username: get(formData, "username"),
       })
-      .where(eq(dataSources.id, params.id))
+      .where(eq(schema.dataSources.id, params.id))
 
     redirect("/data-sources")
   }

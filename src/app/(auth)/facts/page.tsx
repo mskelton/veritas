@@ -1,17 +1,17 @@
 import Link from "next/link"
 import { ColumnDef, Table } from "@/app/components/Table"
-import { db, facts } from "@/app/lib/db"
+import { db, schema } from "@/app/lib/db"
 
 function getFacts() {
   return db
     .select({
-      description: facts.description,
-      id: facts.id,
-      name: facts.name,
-      query: facts.query,
-      type: facts.type,
+      description: schema.facts.description,
+      id: schema.facts.id,
+      name: schema.facts.name,
+      query: schema.facts.query,
+      type: schema.facts.type,
     })
-    .from(facts)
+    .from(schema.facts)
 }
 
 type Fact = Awaited<ReturnType<typeof getFacts>>[number]

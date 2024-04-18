@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { get } from "./Table.utils"
 
 export interface RenderParams<Row, ColumnKey extends keyof Row> {
   row: Row
@@ -69,7 +70,7 @@ export function Table<Row>({
           {rows.map((row) => (
             <tr key={row[rowKey as keyof typeof row] as string}>
               {columnDefs.map((column, i) => {
-                const value = row[column.key as keyof Row]
+                const value = get(row, column.key)
 
                 return (
                   <td

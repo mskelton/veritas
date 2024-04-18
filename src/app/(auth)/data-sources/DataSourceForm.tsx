@@ -19,6 +19,7 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
           title="Add Data Source"
         >
           <TextField
+            autoFocus
             className="sm:col-span-2"
             defaultValue={defaultValues?.name ?? ""}
             label="Name"
