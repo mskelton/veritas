@@ -1,5 +1,5 @@
-import { ArrowPathIcon } from "@heroicons/react/24/solid"
 import { twMerge } from "tailwind-merge"
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,7 +31,7 @@ export function Button({
 
       {isLoading ? (
         <span className="absolute inset-0 bg-inherit flex items-center justify-center">
-          <ArrowPathIcon className="size-6 animate-spin" />
+          <LoadingSpinner className="size-6" />
         </span>
       ) : null}
     </button>

@@ -15,6 +15,13 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
+      keyframes: {
+        "loading-spinner": {
+          "100%": {
+            transform: "rotate(1turn)",
+          },
+        },
+      },
     },
   },
 }
