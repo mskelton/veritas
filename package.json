@@ -2,6 +2,7 @@
   "name": "facts",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,9 @@
     "lint": "eslint .",
     "migrate": "drizzle-kit push:sqlite",
     "test:setup": "./scripts/setup-tests.sh",
-    "test": "playwright test"
+    "test": "playwright test",
+    "fmt": "prettier --write .",
+    "fmt:check": "prettier --check ."
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

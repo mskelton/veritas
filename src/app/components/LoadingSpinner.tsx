@@ -6,11 +6,11 @@ export interface LoadingSpinnerProps
 
 export function LoadingSpinner({ className, ...props }: LoadingSpinnerProps) {
   return (
-    <div className={twMerge("size-full relative", className)} {...props}>
+    <div className={twMerge("relative size-full", className)} {...props}>
       <svg
         className={clsx(
-          "fill-none stroke-current inset-0 absolute origin-center size-full",
-          "[stroke-dasharray:calc(100%*2.8)] [stroke-dashoffset:calc(100%*2.25)] [stroke-width:calc(100%/10)] [stroke-linecap:round]",
+          "absolute inset-0 size-full origin-center fill-none stroke-current",
+          "[stroke-dasharray:calc(100%*2.8)] [stroke-dashoffset:calc(100%*2.25)] [stroke-linecap:round] [stroke-width:calc(100%/10)]",
           "animate-[loading-spinner_.86s_cubic-bezier(.4,.15,.6,.85)_infinite]",
         )}
         focusable="false"

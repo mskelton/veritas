@@ -94,8 +94,9 @@ export function Sidebar() {
                     </button>
                   </div>
                 </Transition.Child>
+
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 dark:bg-zinc-900">
                   <div className="flex h-16 shrink-0 items-center">
                     <img
                       alt="Your Company"
@@ -104,71 +105,7 @@ export function Sidebar() {
                     />
                   </div>
 
-                  <nav className="flex flex-1 flex-col">
-                    <ul className="flex flex-1 flex-col gap-y-7" role="list">
-                      <li>
-                        <ul className="-mx-2 space-y-1" role="list">
-                          {navigation.map((item) => (
-                            <li key={item.name}>
-                              <a
-                                className={clsx(
-                                  isActive(item)
-                                    ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-                                )}
-                                href={item.href}
-                              >
-                                <item.icon
-                                  aria-hidden="true"
-                                  className={clsx(
-                                    isActive(item)
-                                      ? "text-indigo-600"
-                                      : "text-gray-400 group-hover:text-indigo-600 transition-colors",
-                                    "h-6 w-6 shrink-0",
-                                  )}
-                                />
-                                {item.name}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-
-                      <li>
-                        <div className="text-xs font-semibold leading-6 text-gray-400">
-                          Recent facts
-                        </div>
-                        <ul className="-mx-2 mt-2 space-y-1" role="list">
-                          {recent.map((team) => (
-                            <li key={team.name}>
-                              <a
-                                className={clsx(
-                                  team.current
-                                    ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-                                )}
-                                href={team.href}
-                              >
-                                <span
-                                  className={clsx(
-                                    team.current
-                                      ? "text-indigo-600 border-indigo-600"
-                                      : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 transition-colors",
-                                    "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white",
-                                  )}
-                                >
-                                  {team.initial}
-                                </span>
-                                <span className="truncate">{team.name}</span>
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    </ul>
-                  </nav>
+                  <SidebarNav />
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -176,10 +113,8 @@ export function Sidebar() {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 dark:border-zinc-800 dark:bg-zinc-900">
           <div className="flex h-16 shrink-0 items-center">
             <img
               alt="Your Company"
@@ -187,90 +122,14 @@ export function Sidebar() {
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             />
           </div>
-          <nav className="flex flex-1 flex-col">
-            <ul className="flex flex-1 flex-col gap-y-7" role="list">
-              <li>
-                <ul className="-mx-2 space-y-1" role="list">
-                  {navigation.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        className={clsx(
-                          isActive(item)
-                            ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-                        )}
-                        href={item.href}
-                      >
-                        <item.icon
-                          aria-hidden="true"
-                          className={clsx(
-                            isActive(item)
-                              ? "text-indigo-600"
-                              : "text-gray-400 group-hover:text-indigo-600 transition-colors",
-                            "h-6 w-6 shrink-0",
-                          )}
-                        />
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <div className="text-xs font-semibold leading-6 text-gray-400">
-                  Recent facts
-                </div>
-                <ul className="-mx-2 mt-2 space-y-1" role="list">
-                  {recent.map((team) => (
-                    <li key={team.name}>
-                      <a
-                        className={clsx(
-                          team.current
-                            ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-                        )}
-                        href={team.href}
-                      >
-                        <span
-                          className={clsx(
-                            team.current
-                              ? "text-indigo-600 border-indigo-600"
-                              : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 transition-colors",
-                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white",
-                          )}
-                        >
-                          {team.initial}
-                        </span>
-                        <span className="truncate">{team.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className="-mx-6 mt-auto">
-                <a
-                  className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 transition-colors"
-                  href="#"
-                >
-                  <img
-                    alt=""
-                    className="h-8 w-8 rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  />
-                  <span className="sr-only">Your profile</span>
-                  <span aria-hidden="true">Tom Cook</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+
+          <SidebarNav />
         </div>
       </div>
 
-      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden dark:bg-zinc-900">
         <button
-          className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+          className="-m-2.5 p-2.5 text-gray-700 lg:hidden dark:text-gray-300"
           onClick={() => setIsOpen(true)}
           type="button"
         >
@@ -278,7 +137,7 @@ export function Sidebar() {
           <Bars3Icon aria-hidden="true" className="h-6 w-6" />
         </button>
 
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
+        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
           {activeItem?.name}
         </div>
 
@@ -286,11 +145,85 @@ export function Sidebar() {
           <span className="sr-only">Your profile</span>
           <img
             alt=""
-            className="h-8 w-8 rounded-full bg-gray-50"
+            className="h-8 w-8 rounded-full bg-gray-50 dark:bg-gray-900"
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           />
         </a>
       </div>
     </>
+  )
+}
+
+function SidebarNav() {
+  const pathname = usePathname()
+  const isActive = (item: NavItem) =>
+    item.href === "/" ? item.href === pathname : pathname.startsWith(item.href)
+
+  return (
+    <nav className="flex flex-1 flex-col">
+      <ul className="flex flex-1 flex-col gap-y-7" role="list">
+        <li>
+          <ul className="-mx-2 space-y-1" role="list">
+            {navigation.map((item) => (
+              <li key={item.name}>
+                <a
+                  className={clsx(
+                    isActive(item)
+                      ? "bg-zinc-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400"
+                      : "text-gray-700 transition-colors hover:bg-zinc-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950 dark:hover:text-indigo-400",
+                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                  )}
+                  href={item.href}
+                >
+                  <item.icon
+                    aria-hidden="true"
+                    className={clsx(
+                      isActive(item)
+                        ? "text-indigo-600 dark:text-indigo-400"
+                        : "text-gray-400 transition-colors group-hover:text-indigo-600 dark:text-gray-600 dark:group-hover:text-indigo-600",
+                      "h-6 w-6 shrink-0",
+                    )}
+                  />
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+
+        <li>
+          <div className="text-xs font-semibold leading-6 text-gray-400">
+            Recent facts
+          </div>
+          <ul className="-mx-2 mt-2 space-y-1" role="list">
+            {recent.map((team) => (
+              <li key={team.name}>
+                <a
+                  className={clsx(
+                    team.current
+                      ? "bg-gray-50 text-indigo-600 dark:bg-zinc-950"
+                      : "text-gray-700 transition-colors hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950",
+                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                  )}
+                  href={team.href}
+                >
+                  <span
+                    className={clsx(
+                      team.current
+                        ? "border-indigo-600 text-indigo-600"
+                        : "border-gray-200 text-gray-400 transition-colors group-hover:border-indigo-600 group-hover:text-indigo-600 dark:border-zinc-800 dark:text-gray-700",
+                      "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium dark:bg-zinc-950",
+                    )}
+                  >
+                    {team.initial}
+                  </span>
+                  <span className="truncate">{team.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </nav>
   )
 }

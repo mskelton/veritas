@@ -49,7 +49,7 @@ export function RadioGroup<T extends string>({
                 />
 
                 <label
-                  className="ml-3 block text-sm leading-6 text-gray-900"
+                  className="ml-3 block text-sm leading-6 text-gray-900 dark:text-gray-100"
                   htmlFor={id}
                 >
                   {option.label}

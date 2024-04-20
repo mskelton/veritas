@@ -1,4 +1,4 @@
-import { SerializableError } from "./runQuery"
+import { SerializableError } from "@/app/lib/errors"
 
 export interface QueryErrorProps {
   error: SerializableError
@@ -6,7 +6,7 @@ export interface QueryErrorProps {
 
 export function QueryError({ error }: QueryErrorProps) {
   return (
-    <pre className="bg-red-300 border-red-500 border rounded-md p-4 text-xs">
+    <pre className="rounded-md border border-red-500 bg-red-300 p-4 text-xs">
       <code>{error.message}</code>
     </pre>
   )

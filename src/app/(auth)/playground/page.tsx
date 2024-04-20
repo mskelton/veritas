@@ -2,6 +2,7 @@
 
 import { useFormState } from "react-dom"
 import { Label } from "@/app/components/Label"
+import { PageHeader } from "@/app/components/PageHeader"
 import { SubmitButton } from "@/app/components/SubmitButton"
 import { Table } from "@/app/components/Table"
 import { ColumnDef } from "@/app/components/Table"
@@ -34,17 +35,10 @@ export default function Page() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">
-            Query Playground
-          </h1>
-
-          <p className="mt-2 text-sm text-gray-700">
-            Test and develop queries to build your facts.
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        subtitle="Test and develop queries to build your facts."
+        title="Query Playground"
+      />
 
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

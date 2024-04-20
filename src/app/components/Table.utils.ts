@@ -5,7 +5,11 @@ function objectHas<K extends string>(
   return typeof obj === "object" && obj !== null && Object.hasOwn(obj, key)
 }
 
-export function get(obj: Record<string, unknown>, key: string): unknown {
+export function get(obj: unknown, key: string | number | symbol): unknown {
+  if (typeof key !== "string") {
+    return (obj as any)[key] as unknown
+  }
+
   const parts = key.split(".")
   let value: unknown = obj
 

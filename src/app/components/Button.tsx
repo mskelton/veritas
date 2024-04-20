@@ -17,7 +17,7 @@ export function Button({
   return (
     <button
       className={twMerge(
-        "rounded-md px-3 py-2 text-sm font-semibold leading-6 transition-colors relative overflow-hidden",
+        "relative overflow-hidden rounded-md px-3 py-2 text-sm font-semibold leading-6 transition-colors",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
         variant === "primary" &&
           "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500",
@@ -30,7 +30,7 @@ export function Button({
       {children}
 
       {isLoading ? (
-        <span className="absolute inset-0 bg-inherit flex items-center justify-center">
+        <span className="absolute inset-0 flex items-center justify-center bg-inherit">
           <LoadingSpinner className="size-6" />
         </span>
       ) : null}

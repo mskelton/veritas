@@ -7,7 +7,7 @@ export function Label({ className, ...props }: LabelProps) {
   return (
     <label
       className={twMerge(
-        "block text-sm font-medium leading-6 text-gray-900",
+        "block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100",
         className,
       )}
       {...props}
