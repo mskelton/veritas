@@ -43,7 +43,7 @@ const columnDefs: ColumnDef<DataSource>[] = [
     key: "actions",
     render: ({ row }) => (
       <Link
-        className="text-indigo-600 hover:text-indigo-900"
+        className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400"
         href={`/data-sources/${row.id}`}
       >
         Edit

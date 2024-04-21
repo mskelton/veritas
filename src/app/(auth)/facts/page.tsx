@@ -40,7 +40,7 @@ const columnDefs: ColumnDef<Fact>[] = [
     key: "actions",
     render: ({ row }) => (
       <Link
-        className="text-indigo-600 hover:text-indigo-900"
+        className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400"
         href={`/facts/${row.id}`}
       >
         Edit

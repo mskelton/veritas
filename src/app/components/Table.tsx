@@ -30,6 +30,7 @@ export interface TableProps<Row> {
   columnDefs: ColumnDef<Row, keyof Row>[]
   /**
    * The key to use for each row.
+   *
    * @default "id"
    */
   rowKey?: string
@@ -42,7 +43,7 @@ export function Table<Row>({
   rows,
 }: TableProps<Row>) {
   return (
-    <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+    <div className="overflow-hidden shadow ring-1 ring-gray-200 dark:ring-zinc-700 sm:rounded-lg">
       <table className="min-w-full divide-y divide-gray-300 dark:divide-zinc-700">
         <thead className="bg-gray-50 dark:bg-zinc-800">
           <tr>
@@ -78,8 +79,8 @@ export function Table<Row>({
                     className={clsx(
                       "whitespace-nowrap py-4 text-sm",
                       i === 0
-                        ? "text-gray-900 sm:pl-6 dark:text-gray-100"
-                        : "px-3 text-gray-500",
+                        ? "text-gray-900 dark:text-gray-100 sm:pl-6"
+                        : "px-3 text-gray-500 dark:text-gray-400",
                       i === columnDefs.length - 1 && "sm:pr-6",
                       column.align === "right" && "text-right",
                       column.align === "center" && "text-center",

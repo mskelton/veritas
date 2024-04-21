@@ -127,9 +127,9 @@ export function Sidebar() {
         </div>
       </div>
 
-      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden dark:bg-zinc-900">
+      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm dark:bg-zinc-900 sm:px-6 lg:hidden">
         <button
-          className="-m-2.5 p-2.5 text-gray-700 lg:hidden dark:text-gray-300"
+          className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
           onClick={() => setIsOpen(true)}
           type="button"
         >
@@ -169,8 +169,8 @@ function SidebarNav() {
                 <a
                   className={clsx(
                     isActive(item)
-                      ? "bg-zinc-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400"
-                      : "text-gray-700 transition-colors hover:bg-zinc-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950 dark:hover:text-indigo-400",
+                      ? "bg-zinc-50 text-indigo-600 dark:bg-zinc-950/40 dark:text-indigo-400"
+                      : "text-gray-700 transition-colors hover:bg-zinc-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950/40 dark:hover:text-indigo-400",
                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                   )}
                   href={item.href}
@@ -201,8 +201,8 @@ function SidebarNav() {
                 <a
                   className={clsx(
                     team.current
-                      ? "bg-gray-50 text-indigo-600 dark:bg-zinc-950"
-                      : "text-gray-700 transition-colors hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950",
+                      ? "bg-gray-50 text-indigo-600 dark:bg-zinc-950/40"
+                      : "text-gray-700 transition-colors hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950/40",
                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                   )}
                   href={team.href}
