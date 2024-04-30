@@ -1,8 +1,9 @@
-import { Button } from "@/app/components/Button"
-import { FormSection } from "@/app/components/FormSection"
-import { RadioGroup } from "@/app/components/RadioGroup"
-import { TextField } from "@/app/components/TextField"
-import { getFact } from "@/app/lib/api/facts"
+import { FormSection } from "@/components/FormSection"
+import { RadioGroup } from "@/components/RadioGroup"
+import { SubmitButton } from "@/components/SubmitButton"
+import { TextField } from "@/components/TextField"
+import { getFact } from "@/lib/api/facts"
+import { Button } from "@/ui/button"
 
 export interface FactFormProps {
   action: (formData: FormData) => void
@@ -18,6 +19,7 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
           title="Add Fact"
         >
           <TextField
+            autoFocus
             className="sm:col-span-2"
             defaultValue={defaultValues?.name ?? ""}
             label="Name"
@@ -35,7 +37,6 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
           <RadioGroup
             className="sm:col-span-2"
             defaultValue={defaultValues?.type ?? "boolean"}
-            description="Select the type of fact you want to create."
             label="Type"
             name="type"
             options={[
@@ -45,18 +46,19 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
           />
 
           <TextField
-            className="sm:col-span-2"
+            className="col-span-full"
             defaultValue={defaultValues?.query ?? ""}
             isMultiline
             label="SQL Query"
             name="query"
+            rows={10}
           />
         </FormSection>
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <Button variant="secondary">Cancel</Button>
-        <Button type="submit">Save</Button>
+        <SubmitButton>Save</SubmitButton>
       </div>
     </form>
   )

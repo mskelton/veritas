@@ -1,4 +1,4 @@
-import { SerializableError } from "@/app/lib/errors"
+import { SerializableError } from "@/lib/errors"
 
 export interface QueryErrorProps {
   error: SerializableError

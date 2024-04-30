@@ -1,13 +1,22 @@
-import { useId } from "react"
-import { Label } from "./Label"
+"use client"
+
+import clsx from "clsx"
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
+import { RadioGroup as BaseRadioGroup, RadioGroupItem } from "@/ui/radio-group"
 
 export interface RadioGroupProps<T extends string> {
   className?: string
   defaultValue?: NoInfer<T>
-  description: string
+  description?: string
   label: string
   name: string
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (value: T) => void
   options: { label: string; value: T }[]
   value?: NoInfer<T>
 }
@@ -22,43 +31,34 @@ export function RadioGroup<T extends string>({
   options,
   value,
 }: RadioGroupProps<T>) {
-  const groupId = useId()
-
   return (
-    <div className={className}>
-      <Label>{label}</Label>
-      <p className="text-xs text-gray-500">{description}</p>
+    <FormItem className={clsx("space-y-3", className)}>
+      <FormLabel>{label}</FormLabel>
+      <FormControl>
+        <BaseRadioGroup
+          className="flex flex-col space-y-1"
+          defaultValue={defaultValue}
+          name={name}
+          onValueChange={onChange}
+          value={value}
+        >
+          {options.map((option) => (
+            <FormItem
+              key={option.value}
+              className="flex items-center space-x-3 space-y-0"
+            >
+              <FormControl>
+                <RadioGroupItem value={option.value} />
+              </FormControl>
 
-      <fieldset className="mt-4">
-        <legend className="sr-only">{label}</legend>
-        <div className="space-y-2">
-          {options.map((option) => {
-            const id = `${groupId}-${option.value}`
+              <FormLabel className="font-normal">{option.label}</FormLabel>
+            </FormItem>
+          ))}
+        </BaseRadioGroup>
+      </FormControl>
 
-            return (
-              <div key={option.value} className="flex items-center">
-                <input
-                  checked={value ? option.value === value : undefined}
-                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                  defaultChecked={option.value === defaultValue}
-                  id={id}
-                  name={name}
-                  onChange={onChange}
-                  type="radio"
-                  value={option.value}
-                />
-
-                <label
-                  className="ml-3 block text-sm leading-6 text-gray-900 dark:text-gray-100"
-                  htmlFor={id}
-                >
-                  {option.label}
-                </label>
-              </div>
-            )
-          })}
-        </div>
-      </fieldset>
-    </div>
+      <FormDescription>{description}</FormDescription>
+      <FormMessage />
+    </FormItem>
   )
 }

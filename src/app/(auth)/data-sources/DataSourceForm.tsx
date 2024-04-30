@@ -1,9 +1,13 @@
-import { Button } from "@/app/components/Button"
-import { FormSection } from "@/app/components/FormSection"
-import { NumberField } from "@/app/components/NumberField"
-import { RadioGroup } from "@/app/components/RadioGroup"
-import { TextField } from "@/app/components/TextField"
-import { getDataSource } from "@/app/lib/api/dataSources"
+import { FormSection } from "@/components/FormSection"
+import { NumberField } from "@/components/NumberField"
+import { RadioGroup } from "@/components/RadioGroup"
+import { SubmitButton } from "@/components/SubmitButton"
+import { TextField } from "@/components/TextField"
+import { getDataSource } from "@/lib/api/dataSources"
+import { Button } from "@/ui/button"
+import { Form } from "@/ui/form"
+
+export const placeholderPassword = "XXXXXXXX"
 
 export interface DataSourceFormProps {
   action: (formData: FormData) => void
@@ -12,12 +16,14 @@ export interface DataSourceFormProps {
 
 export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
   return (
-    <form action={action} className="max-w-screen-sm">
+    <Form action={action} className="max-w-screen-sm">
       <div className="space-y-12">
         <FormSection
           subtitle="This information will be displayed publicly so be careful what you share."
           title="Add Data Source"
         >
+          <input name="id" type="hidden" value={defaultValues?.id ?? ""} />
+
           <TextField
             autoFocus
             className="sm:col-span-2"
@@ -42,7 +48,6 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
           <RadioGroup
             className="sm:col-span-2"
             defaultValue={defaultValues?.type ?? "postgres"}
-            description="Select the type of database you want to connect to."
             label="Database Engine"
             name="type"
             options={[
@@ -60,7 +65,7 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
 
           <NumberField
             className="sm:col-span-2"
-            defaultValue={defaultValues?.port ?? ""}
+            defaultValue={defaultValues?.port ?? 5432}
             label="Port"
             name="port"
           />
@@ -74,7 +79,6 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
 
           <TextField
             className="sm:col-span-2"
-            defaultValue={defaultValues?.password ?? ""}
             label="Password"
             name="password"
             type="password"
@@ -89,10 +93,10 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
         </FormSection>
       </div>
 
-      <div className="mt-6 flex items-center justify-end gap-x-6">
+      <div className="mt-6 flex items-center gap-x-6">
         <Button variant="secondary">Cancel</Button>
-        <Button type="submit">Save</Button>
+        <SubmitButton>Save</SubmitButton>
       </div>
-    </form>
+    </Form>
   )
 }

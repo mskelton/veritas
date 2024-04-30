@@ -1,8 +1,9 @@
 /* eslint-disable sort/object-properties */
-import { integer, pgTable, text } from "drizzle-orm/pg-core"
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const dataSources = pgTable("data_sources", {
   id: text("id").primaryKey(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
   name: text("name").notNull(),
   description: text("description"),
   type: text("type", { enum: ["postgres", "mysql"] }).notNull(),
@@ -15,8 +16,11 @@ export const dataSources = pgTable("data_sources", {
 
 export const facts = pgTable("facts", {
   id: text("id").primaryKey(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
   name: text("name").notNull(),
   description: text("description"),
   type: text("type", { enum: ["boolean", "count"] }).notNull(),
   query: text("query").notNull(),
 })
+
+export type FactType = "boolean" | "count"

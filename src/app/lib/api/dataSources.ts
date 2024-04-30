@@ -9,7 +9,6 @@ export async function getDataSource(id: string) {
       host: schema.dataSources.host,
       id: schema.dataSources.id,
       name: schema.dataSources.name,
-      password: schema.dataSources.password,
       port: schema.dataSources.port,
       type: schema.dataSources.type,
       username: schema.dataSources.username,

@@ -1,34 +1,21 @@
 "use client"
 
 import { useFormState } from "react-dom"
-import { Label } from "@/app/components/Label"
-import { PageHeader } from "@/app/components/PageHeader"
-import { SubmitButton } from "@/app/components/SubmitButton"
-import { Table } from "@/app/components/Table"
-import { ColumnDef } from "@/app/components/Table"
-import { TextField } from "@/app/components/TextField"
+import { FactValue } from "@/components/FactValue"
+import { PageHeader } from "@/components/PageHeader"
+import { SubmitButton } from "@/components/SubmitButton"
+import { TextField } from "@/components/TextField"
+import { runQueryAction } from "@/lib/query"
+import { Label } from "@/ui/label"
+import { Table } from "@/ui/table"
+import {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/ui/table"
 import { QueryError } from "./QueryError"
-import { runQueryAction, RunQueryResult } from "./runQuery"
-
-const columnDefs: ColumnDef<RunQueryResult>[] = [
-  {
-    emphasize: true,
-    key: "dataSource.name",
-    title: "Data Source",
-  },
-  {
-    key: "value",
-    render: ({ value }) =>
-      value === true ? (
-        <span className="text-green-500">Yes</span>
-      ) : value === false ? (
-        <span className="text-red-500">No</span>
-      ) : (
-        (value as number)
-      ),
-    title: "Result",
-  },
-]
 
 export default function Page() {
   const [state, formAction] = useFormState(runQueryAction, {})
@@ -43,7 +30,9 @@ export default function Page() {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <form action={formAction} className="mb-4">
+            <form action={formAction} className="mb-8">
+              <input name="type" type="hidden" value="boolean" />
+
               <TextField
                 defaultValue="select * from authors"
                 isMultiline
@@ -59,7 +48,27 @@ export default function Page() {
             ) : state.results ? (
               <>
                 <Label className="mb-2">Results</Label>
-                <Table columnDefs={columnDefs} rows={state.results} />
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Data Source</TableHead>
+                        <TableHead>Result</TableHead>
+                      </TableRow>
+                    </TableHeader>
+
+                    <TableBody>
+                      {state.results.map((result) => (
+                        <TableRow key={result.dataSource.id}>
+                          <TableCell>{result.dataSource.name}</TableCell>
+                          <TableCell>
+                            <FactValue value={result.value} />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </>
             ) : null}
           </div>

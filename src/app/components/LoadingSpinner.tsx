@@ -6,7 +6,7 @@ export interface LoadingSpinnerProps
 
 export function LoadingSpinner({ className, ...props }: LoadingSpinnerProps) {
   return (
-    <div className={twMerge("relative size-full", className)} {...props}>
+    <div className={twMerge("relative size-6", className)} {...props}>
       <svg
         className={clsx(
           "absolute inset-0 size-full origin-center fill-none stroke-current",

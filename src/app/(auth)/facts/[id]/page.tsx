@@ -1,8 +1,10 @@
 import { eq } from "drizzle-orm"
+import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
-import { getFact } from "@/app/lib/api/facts"
-import { db, schema } from "@/app/lib/db"
-import { get } from "@/app/lib/formData"
+import { getFact } from "@/lib/api/facts"
+import { db, schema } from "@/lib/db"
+import { FactType } from "@/lib/db/schema"
+import { get } from "@/lib/formData"
 import { FactForm } from "../FactForm"
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -17,10 +19,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         description: get(formData, "description"),
         name: get(formData, "name"),
         query: get(formData, "query"),
-        type: get(formData, "type") as "boolean" | "count",
+        type: get(formData, "type") as FactType,
       })
       .where(eq(schema.facts.id, params.id))
 
+    revalidateTag("fact:all")
     redirect("/facts")
   }
 

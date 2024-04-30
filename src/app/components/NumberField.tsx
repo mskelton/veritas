@@ -1,6 +1,12 @@
 import { useId } from "react"
-import { Input } from "./Input"
-import { Label } from "./Label"
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
+import { Input } from "@/ui/input"
 
 export interface NumberFieldProps
   extends Pick<
@@ -8,20 +14,34 @@ export interface NumberFieldProps
     "autoComplete" | "defaultValue" | "name" | "value"
   > {
   className?: string
+  description?: string
   label: string
   name: string
 }
 
-export function NumberField({ className, label, ...props }: NumberFieldProps) {
+export function NumberField({
+  className,
+  description,
+  label,
+  ...props
+}: NumberFieldProps) {
   const id = useId()
 
   return (
-    <div className={className}>
-      <Label className="mb-2" htmlFor={id}>
-        {label}
-      </Label>
+    <FormItem className={className}>
+      <FormLabel>{label}</FormLabel>
+      <FormControl>
+        <Input
+          autoComplete="off"
+          id={id}
+          pattern="[0-9]+"
+          type="text"
+          {...props}
+        />
+      </FormControl>
 
-      <Input id={id} type="number" {...props} />
-    </div>
+      <FormDescription>{description}</FormDescription>
+      <FormMessage />
+    </FormItem>
   )
 }

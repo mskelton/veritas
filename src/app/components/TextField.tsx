@@ -1,27 +1,38 @@
 "use client"
 
 import { useId } from "react"
-import { Input } from "./Input"
-import { Label } from "./Label"
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
+import { Input } from "@/ui/input"
+import { Textarea } from "@/ui/textarea"
 
 export interface TextFieldProps
   extends Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "autoComplete" | "autoFocus" | "defaultValue" | "name" | "type" | "value"
+    Exclude<keyof React.InputHTMLAttributes<HTMLInputElement>, `on${string}`>
   > {
   className?: string
+  description?: string
   isMultiline?: boolean
   label: string
   name: string
+  rows?: number
 }
 
 export function TextField({
   className,
+  description,
   isMultiline = false,
   label,
   ...props
 }: TextFieldProps) {
   const id = useId()
+  const Component = isMultiline ? Textarea : Input
 
   function handleKeyDown(
     e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -37,19 +48,20 @@ export function TextField({
   }
 
   return (
-    <div className={className}>
-      <Label className="mb-2" htmlFor={id}>
-        {label}
-      </Label>
+    <FormItem className={className}>
+      <FormLabel>{label}</FormLabel>
+      <FormControl>
+        <Component
+          autoComplete="off"
+          id={id}
+          onKeyDown={isMultiline ? handleKeyDown : undefined}
+          type="text"
+          {...props}
+        />
+      </FormControl>
 
-      <Input
-        autoComplete="off"
-        id={id}
-        isMultiline
-        onKeyDown={isMultiline ? handleKeyDown : undefined}
-        type="text"
-        {...props}
-      />
-    </div>
+      <FormDescription>{description}</FormDescription>
+      <FormMessage />
+    </FormItem>
   )
 }
