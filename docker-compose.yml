@@ -1,7 +1,7 @@
 version: "3"
 services:
   db:
-    container_name: yep-db
+    container_name: veritas-db
     image: postgres:latest
     profiles: [app, test]
     ports:
@@ -9,10 +9,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: yep
+      POSTGRES_DB: veritas
 
   test-postgres-a:
-    container_name: yep-test-postgres-a
+    container_name: veritas-test-postgres-a
     image: postgres:latest
     profiles: [test]
     ports:
@@ -25,7 +25,7 @@ services:
       - ./test/seed/a.sql:/docker-entrypoint-initdb.d/init.sql
 
   test-postgres-b:
-    container_name: yep-test-postgres-b
+    container_name: veritas-test-postgres-b
     image: postgres:latest
     profiles: [test]
     ports:

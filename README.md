@@ -1,4 +1,4 @@
-# Yep
+# Veritas
 
 Assert facts against your data sources
 

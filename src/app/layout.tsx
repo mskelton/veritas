@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   description: "Assert facts against your data sources",
-  title: "Yep",
+  title: "Veritas",
 }
 
 export default function RootLayout({
