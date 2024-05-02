@@ -28,4 +28,4 @@ CREATE TABLE post_tags (
 );
 
 INSERT INTO authors (id, name, bio)
-VALUES (0, 'mark', 'yo');
+VALUES (0, 'Mark', 'Software engineer, Christ follower, small town kid');

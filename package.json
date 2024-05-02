@@ -14,7 +14,8 @@
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
     "db:push": "drizzle-kit push:pg",
-    "db:seed": "node --import tsx --env-file .env scripts/seed.ts"
+    "db:seed": "node --import tsx --env-file .env scripts/seed.ts",
+    "db:rebuild": "./scripts/rebuild-db.sh"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

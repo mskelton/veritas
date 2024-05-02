@@ -1,4 +1,4 @@
-import { db, schema } from "../src/app/lib/db"
+import { client, db, schema } from "../src/app/lib/db"
 import { encrypt } from "../src/app/lib/encryption"
 
 await db.insert(schema.dataSources).values({
@@ -35,6 +35,8 @@ await db.insert(schema.facts).values({
 await db.insert(schema.facts).values({
   id: crypto.randomUUID(),
   name: "Authors starting with 'M'",
-  query: "select count(*) from authors\nwhere name like 'M%'",
+  query: "select * from authors\nwhere name like 'M%'",
   type: "count",
 })
+
+await client.end()
