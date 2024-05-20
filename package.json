@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.13",
     "react-hook-form": "^7.51.3",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.4"

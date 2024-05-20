@@ -1,3 +1,4 @@
+import "server-only"
 import crypto from "node:crypto"
 
 const algorithm = "aes-256-cbc"
