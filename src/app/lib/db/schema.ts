@@ -1,6 +1,14 @@
 /* eslint-disable sort/object-properties */
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
+export const users = pgTable("users", {
+  id: text("id").primaryKey(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+})
+
 export const dataSources = pgTable("data_sources", {
   id: text("id").primaryKey(),
   createdAt: timestamp("created_at").notNull().defaultNow(),

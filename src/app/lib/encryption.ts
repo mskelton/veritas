@@ -37,3 +37,12 @@ export function decrypt(data: string) {
   decrypted += decipher.final("utf-8")
   return decrypted
 }
+
+export function hash(data: string) {
+  const salt = crypto.randomBytes(16).toString("hex")
+  const hash = crypto
+    .pbkdf2Sync(data, salt, 10_000, 64, "sha512")
+    .toString("hex")
+
+  return `${salt}:${hash}`
+}
