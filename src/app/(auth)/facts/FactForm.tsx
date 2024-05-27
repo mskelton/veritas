@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { FormSection } from "@/components/FormSection"
 import { RadioGroup } from "@/components/RadioGroup"
 import { SubmitButton } from "@/components/SubmitButton"
@@ -57,7 +58,10 @@ export function FactForm({ action, defaultValues }: FactFormProps) {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <Button variant="secondary">Cancel</Button>
+        <Button asChild variant="secondary">
+          <Link href="/facts">Cancel</Link>
+        </Button>
+
         <SubmitButton>Save</SubmitButton>
       </div>
     </form>

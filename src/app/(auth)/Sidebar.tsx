@@ -1,25 +1,24 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { Dialog, Transition } from "@headlessui/react"
 import {
-  Bars3Icon,
-  CheckBadgeIcon,
-  CircleStackIcon,
-  CommandLineIcon,
+  CheckCircledIcon,
+  CodeIcon,
+  HamburgerMenuIcon,
   HomeIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline"
+  StackIcon,
+} from "@radix-ui/react-icons"
 import clsx from "clsx"
+import Image from "next/image"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Fragment, useState } from "react"
+import { useState } from "react"
 
 const showRecents = false
 const navigation: NavItem[] = [
   { href: "/", icon: HomeIcon, name: "Dashboard" },
-  { href: "/facts", icon: CheckBadgeIcon, name: "Facts" },
-  { href: "/data-sources", icon: CircleStackIcon, name: "Data Sources" },
-  { href: "/playground", icon: CommandLineIcon, name: "Playground" },
+  { href: "/facts", icon: CheckCircledIcon, name: "Facts" },
+  { href: "/data-sources", icon: StackIcon, name: "Data Sources" },
+  { href: "/playground", icon: CodeIcon, name: "Playground" },
 ]
 
 type NavItem = {
@@ -43,113 +42,40 @@ export function Sidebar() {
 
   return (
     <>
-      <Transition.Root as={Fragment} show={isOpen}>
-        <Dialog
-          as="div"
-          className="relative z-50 lg:hidden"
-          onClose={setIsOpen}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-gray-900/80" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 flex">
-            <Transition.Child
-              as={Fragment}
-              enter="transition ease-in-out duration-300 transform"
-              enterFrom="-translate-x-full"
-              enterTo="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
-              leaveTo="-translate-x-full"
-            >
-              <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1">
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-in-out duration-300"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="ease-in-out duration-300"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                    <button
-                      className="-m-2.5 p-2.5"
-                      onClick={() => setIsOpen(false)}
-                      type="button"
-                    >
-                      <span className="sr-only">Close sidebar</span>
-                      <XMarkIcon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-white"
-                      />
-                    </button>
-                  </div>
-                </Transition.Child>
-
-                {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-background px-6 pb-2">
-                  <div className="flex h-16 shrink-0 items-center">
-                    <img
-                      alt="Your Company"
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    />
-                  </div>
-
-                  <SidebarNav />
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-accent px-6 dark:border-zinc-800">
-          <div className="flex h-16 shrink-0 items-center">
-            <img
-              alt="Your Company"
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            />
+        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-background px-6 dark:border-zinc-800">
+          <div className="flex h-16 shrink-0 items-center text-2xl">
+            Veritas
           </div>
-
           <SidebarNav />
         </div>
       </div>
 
-      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm dark:bg-zinc-900 sm:px-6 lg:hidden">
+      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-background px-4 py-4 shadow-sm sm:px-6 lg:hidden">
         <button
           className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
           onClick={() => setIsOpen(true)}
           type="button"
         >
           <span className="sr-only">Open sidebar</span>
-          <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+          <HamburgerMenuIcon aria-hidden="true" className="h-6 w-6" />
         </button>
 
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
+        <div className="flex-1 text-sm font-semibold leading-6 text-foreground">
           {activeItem?.name}
         </div>
 
-        <a href="#">
+        <Link href="/profile">
           <span className="sr-only">Your profile</span>
-          <img
+          <Image
             alt=""
             className="h-8 w-8 rounded-full bg-gray-50 dark:bg-gray-900"
+            height={32}
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            unoptimized
+            width={32}
           />
-        </a>
+        </Link>
       </div>
     </>
   )
@@ -170,9 +96,9 @@ function SidebarNav() {
                 <a
                   className={clsx(
                     isActive(item)
-                      ? "bg-zinc-50 text-indigo-600 dark:bg-zinc-950/40 dark:text-indigo-400"
-                      : "text-gray-700 transition-colors hover:bg-zinc-50 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-zinc-950/40 dark:hover:text-indigo-400",
-                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                      ? "bg-accent/40 text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-700 transition-colors hover:bg-accent/40 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400",
+                    "group flex items-center gap-x-4 rounded-md p-2 text-sm font-semibold leading-6",
                   )}
                   href={item.href}
                 >
@@ -182,7 +108,7 @@ function SidebarNav() {
                       isActive(item)
                         ? "text-indigo-600 dark:text-indigo-400"
                         : "text-gray-400 transition-colors group-hover:text-indigo-600 dark:text-gray-600 dark:group-hover:text-indigo-600",
-                      "h-6 w-6 shrink-0",
+                      "h-5 w-5 shrink-0",
                     )}
                   />
                   {item.name}
@@ -197,6 +123,7 @@ function SidebarNav() {
             <div className="text-xs font-semibold leading-6 text-gray-400">
               Recent facts
             </div>
+
             <ul className="-mx-2 mt-2 space-y-1" role="list">
               {recent.map((team) => (
                 <li key={team.name}>

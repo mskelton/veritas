@@ -59,6 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={ref}
         className={cn(buttonVariants({ className, size, variant }))}
+        type="button"
         {...props}
       >
         <Slottable>{children}</Slottable>

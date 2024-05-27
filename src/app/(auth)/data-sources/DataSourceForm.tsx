@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { FormSection } from "@/components/FormSection"
 import { NumberField } from "@/components/NumberField"
 import { RadioGroup } from "@/components/RadioGroup"
@@ -94,7 +95,10 @@ export function DataSourceForm({ action, defaultValues }: DataSourceFormProps) {
       </div>
 
       <div className="mt-6 flex items-center gap-x-6">
-        <Button variant="secondary">Cancel</Button>
+        <Button asChild variant="secondary">
+          <Link href="/data-sources">Cancel</Link>
+        </Button>
+
         <SubmitButton>Save</SubmitButton>
       </div>
     </Form>
