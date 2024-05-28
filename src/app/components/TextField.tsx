@@ -48,7 +48,7 @@ export function TextField({
   }
 
   return (
-    <FormItem className={className}>
+    <FormItem className={className} name={props.name}>
       <FormLabel>{label}</FormLabel>
       <FormControl>
         <Component

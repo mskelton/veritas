@@ -32,7 +32,7 @@ export function RadioGroup<T extends string>({
   value,
 }: RadioGroupProps<T>) {
   return (
-    <FormItem className={clsx("space-y-3", className)}>
+    <FormItem className={clsx("space-y-3", className)} name={name}>
       <FormLabel>{label}</FormLabel>
       <FormControl>
         <BaseRadioGroup
@@ -46,6 +46,7 @@ export function RadioGroup<T extends string>({
             <FormItem
               key={option.value}
               className="flex items-center space-x-3 space-y-0"
+              name={name}
             >
               <FormControl>
                 <RadioGroupItem value={option.value} />

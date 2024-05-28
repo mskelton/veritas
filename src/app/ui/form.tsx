@@ -6,15 +6,24 @@ import React, { createContext, useContext, useId, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Label } from "@/ui/label"
 
+type FormState = {
+  errors?: Record<string, string[] | undefined>
+}
+
 type FormContextValue = {
   formId: string
+  state?: FormState
 }
 
 const FormContext = createContext<FormContextValue>(null!)
 
-function Form(props: React.FormHTMLAttributes<HTMLFormElement>) {
+type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
+  state?: FormState
+}
+
+function Form({ state, ...props }: FormProps) {
   const formId = useId()
-  const ctx = useMemo(() => ({ formId }), [formId])
+  const ctx = useMemo(() => ({ formId, state }), [formId, state])
 
   return (
     <FormContext.Provider value={ctx}>
@@ -24,11 +33,11 @@ function Form(props: React.FormHTMLAttributes<HTMLFormElement>) {
 }
 
 function useFormField() {
-  const { id } = useContext(FormItemContext)
+  const { state } = useContext(FormContext)
+  const { id, name } = useContext(FormItemContext)
 
   return {
-    // TODO:
-    error: false,
+    error: state?.errors?.[name],
     formDescriptionId: `${id}-form-item-description`,
     formItemId: `${id}-form-item`,
     formMessageId: `${id}-form-item-message`,
@@ -38,25 +47,29 @@ function useFormField() {
 
 type FormItemContextValue = {
   id: string
+  name: string
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 )
 
-const FormItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const id = React.useId()
-  const ctx = useMemo(() => ({ id }), [id])
+type FormItemProps = React.HTMLAttributes<HTMLDivElement> & {
+  name: string
+}
 
-  return (
-    <FormItemContext.Provider value={ctx}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
-    </FormItemContext.Provider>
-  )
-})
+const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(
+  ({ className, name, ...props }, ref) => {
+    const id = React.useId()
+    const ctx = useMemo(() => ({ id, name }), [id, name])
+
+    return (
+      <FormItemContext.Provider value={ctx}>
+        <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      </FormItemContext.Provider>
+    )
+  },
+)
 FormItem.displayName = "FormItem"
 
 const FormLabel = React.forwardRef<
@@ -122,7 +135,7 @@ const FormMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ children, className, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message) : children
+  const body = error ? String(error?.[0]) : children
 
   if (!body) {
     return null
