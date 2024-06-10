@@ -9,5 +9,5 @@ export interface SubmitButtonProps extends ButtonProps {}
 export function SubmitButton(props: SubmitButtonProps) {
   const { pending } = useFormStatus()
 
-  return <Button isLoading={pending} type="submit" {...props} />
+  return <Button loading={pending} type="submit" {...props} />
 }

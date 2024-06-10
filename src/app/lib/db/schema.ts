@@ -1,4 +1,5 @@
 /* eslint-disable sort/object-properties */
+import { relations } from "drizzle-orm"
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const users = pgTable("users", {
@@ -7,6 +8,19 @@ export const users = pgTable("users", {
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
+})
+
+export const usersRelations = relations(users, ({ many }) => ({
+  sessions: many(sessions),
+}))
+
+export const sessions = pgTable("sessions", {
+  id: text("id").primaryKey(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
 })
 
 export const dataSources = pgTable("data_sources", {

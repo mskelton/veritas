@@ -15,7 +15,7 @@ import { Form } from "@/ui/form"
 import { login } from "./actions"
 
 export default function Page() {
-  const [state, formAction] = useFormState(login, {})
+  const [state, formAction, isPending] = useFormState(login, {})
 
   return (
     <Form
@@ -43,7 +43,7 @@ export default function Page() {
         </CardContent>
 
         <CardFooter>
-          <Button className="w-full" type="submit">
+          <Button className="w-full" loading={isPending} type="submit">
             Sign in
           </Button>
         </CardFooter>
